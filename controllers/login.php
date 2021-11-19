@@ -19,7 +19,7 @@ if (isset($_POST['login'])) {
                 $_SESSION['id'] = $row['id'];
                 $_SESSION['username'] = $row['username'];
                 $_SESSION['name'] = $row['name'];
-                header("Location:http://localhost:8080/ltwbt3" ,TRUE, 301);
+                header("Location:http://localhost/ltwbt3" ,TRUE, 301);
                 return;
             } else {
                 header("Location:http://localhost:8080/ltwbt3/pages/login.php" ,TRUE, 301);

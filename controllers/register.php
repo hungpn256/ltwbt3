@@ -10,7 +10,7 @@ if (isset($_POST['register'])) {
             $pre_stm->bind_param("sss", $_POST['username'], $_POST['password'], $_POST['name']);
             $pre_stm->execute();
 
-            header("Location:http://localhost:8080/ltwbt3/pages/login.php", TRUE, 301);
+            header("Location:http://localhost/ltwbt3/pages/login.php", TRUE, 301);
             
         } catch (PDOException $e) {
             // header("Location:" . DOMAIN . "/pages/register.php", TRUE, 301);

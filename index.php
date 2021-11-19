@@ -1,6 +1,6 @@
 <?php
-    include_once("./controllers/requireLogin.php")
-?>
+    // include_once("./controllers/requireLogin.php")
+?> 
 <!DOCTYPE html>
 <html lang="en">
 

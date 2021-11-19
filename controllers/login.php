@@ -1,7 +1,6 @@
 <?php
 session_start();
 include_once("../configs/db.php");
-include_once("../configs/constants.php");
 if (isset($_POST['login'])) {
     if (empty($_POST['username']) || empty($_POST['password'])) {
         header("location:index.php", true, 301);
@@ -20,10 +19,10 @@ if (isset($_POST['login'])) {
                 $_SESSION['id'] = $row['id'];
                 $_SESSION['username'] = $row['username'];
                 $_SESSION['name'] = $row['name'];
-                header("Location:".DOMAIN ,TRUE, 301);
+                header("Location:http://localhost:8080/ltwbt3" ,TRUE, 301);
                 return;
             } else {
-                header("Location:".DOMAIN."/pages/login.php" ,TRUE, 301);
+                header("Location:http://localhost:8080/ltwbt3/pages/login.php" ,TRUE, 301);
             }
         }
     }

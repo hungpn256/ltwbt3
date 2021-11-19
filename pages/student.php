@@ -240,20 +240,23 @@
                 <div class="container-fluid">
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">BẢNG QUẢN LÝ SINH VIÊN</h1>
+                        <h3 class="h3 mb-0 text-gray-800">BẢNG QUẢN LÝ SINH VIÊN</h3>
                     </div>
                     <div class="row">
                         <div class="card">
                             <div class="card-body">
                                 <div id="table" class="table-student">
-                                    <form class="form-inline">
-                                        <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search">
-                                        <i class="fas fa-search" aria-hidden="true"></i>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <form class="form-inline">
+                                            <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search">
+                                            <i class="fas fa-search" aria-hidden="true"></i>
+                                            
+                                        </form>
                                         <span class="table-add float-right mb-3 mr-2 ml-4"><a href="#!" class="text-success">
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
-                                                    <i class="fas fa-plus fa-2x" aria-hidden="true"></i>
-                                                </button></a></span>
-                                    </form>
+                                                    <button type="button" class="btn btn-primary btn-rounded btn-sm" data-toggle="modal" data-target="#basicExampleModal">
+                                                        <i class="fas fa-plus fa-2x" aria-hidden="true"></i>
+                                                    </button></a></span>
+                                    </div>
 
                                     <table class="table table-bordered table-responsive-md table-striped text-center">
                                         <thead>
@@ -305,6 +308,12 @@
                                         </button>
                                     </div>
                                     <div class="modal-body" method="post">
+                                        <label for="basic-url">Mã sinh viên</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                        </div>
                                         <label for="basic-url">Họ và tên</label>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
@@ -439,7 +448,18 @@
     <script src="../components/vendor/chart.js/Chart.min.js"></script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <script src="../components/js/demo/chart-pie-demo.js"></script>
-
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+        <script type="text/javascript" src="js/mdb.min.js"></script>
 </body>
 
 </html>

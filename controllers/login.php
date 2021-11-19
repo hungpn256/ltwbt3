@@ -12,7 +12,7 @@ if (isset($_POST['login'])) {
         $rs = $pre_stm->get_result();
 
         if ($rs->num_rows < 1) {
-            echo "Tai khoan chua ton tai!";
+            echo "Tai khoan chua ton tai!!";
         } else {
             $row = $rs->fetch_assoc();
             if ($_POST['password'] == $row['password']) {

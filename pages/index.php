@@ -25,7 +25,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.php">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
                 <div class="sidebar-brand-icon">
                     <img src="https://tuyensinh.ptit.edu.vn/_next/static/images/logo-c5be62e95f69e6f8285d1fd2ee0688ca.png" width="35" height="50">
                 </div>
@@ -37,7 +37,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="dashboard.php">
+                <a class="nav-link" href="index.php">
 
                     <span class="fs-5 ">Quản lý Học viện</span></a>
             </li>
@@ -49,7 +49,7 @@
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="bangtin.php">
 
                     <span class="fs-6">Bảng tin</span>
                 </a>
@@ -62,8 +62,8 @@
                 <div id="NganhHocThuGon" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Chỉnh sửa thông tin</h6>
-                        <a class="collapse-item fs-6" href="">Công nghệ</a>
-                        <a class="collapse-item fs-6" href="">Kinh tế</a>
+                        <a class="collapse-item fs-6" href="congnghe.php">Công nghệ</a>
+                        <a class="collapse-item fs-6" href="kinhte.php">Kinh tế</a>
 
                     </div>
                 </div>
@@ -292,7 +292,7 @@
                             </div>
                         </div>
 
-                        <!-- Pending Requests Card Example -->
+                        <!--Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body">
@@ -326,7 +326,7 @@
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-area">
-                                        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                                        <div id="chartContainer" style="height: 330px; width: 100%;"></div>
                                     </div>
                                 </div>
                             </div>
@@ -407,7 +407,7 @@
                     valueFormatString: "#0,,.",
                     suffix: "mn",
                     stripLines: [{
-                        value: 3366500,
+                        value: 3066500,
                         label: "Average"
                     }]
                 },

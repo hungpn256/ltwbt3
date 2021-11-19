@@ -1,6 +1,7 @@
 <?php
     session_start();
+    include_once('../configs/constants.php');
     if(!isset($_SESSION['id'])){
-        header("Location:http://localhost:8080/ltwbt3/pages/login.php" ,true, 301);
+        header("Location:".DOMAIN."/pages/login.php" ,true, 301);
     }
 ?>

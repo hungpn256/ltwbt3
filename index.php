@@ -20,184 +20,67 @@
 <body>
     <div id="slide-out" class="side-nav2 side">
         <ul class="custom-scrollbar">
-          <!-- Logo -->
-          <li>
-            <div class="logo-wrapper waves-light">
-              <a href="#"><img src="https://mdbootstrap.com/img/logo/mdb-transparent.png"
-                  class="img-fluid flex-center"></a>
-            </div>
-          </li>
-          <!--/. Logo -->
-          <!--Social-->
-          <li>
-            <ul class="social">
-              <li><a href="#" class="icons-sm fb-ic"><i class="fab fa-facebook-f"> </i></a></li>
-              <li><a href="#" class="icons-sm pin-ic"><i class="fab fa-pinterest"> </i></a></li>
-              <li><a href="#" class="icons-sm gplus-ic"><i class="fab fa-google-plus-g"> </i></a></li>
-              <li><a href="#" class="icons-sm tw-ic"><i class="fab fa-twitter"> </i></a></li>
-            </ul>
-          </li>
-          <!--/Social-->
-          <!--Search Form-->
-          <li>
-            <form class="search-form" role="search">
-              <div class="form-group md-form mt-0 pt-1 waves-light">
-                <input type="text" class="form-control" placeholder="Search">
-              </div>
-            </form>
-          </li>
-          <!--/.Search Form-->
-          <!-- Side navigation links -->
-          <li>
-            <ul class="collapsible collapsible-accordion">
-              <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-chevron-right"></i> Submit
-                  blog<i class="fas fa-angle-down rotate-icon"></i></a>
-                <div class="collapsible-body">
-                  <ul>
-                    <li><a href="#" class="waves-effect">Submit listing</a>
-                    </li>
-                    <li><a href="#" class="waves-effect">Registration form</a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li><a class="collapsible-header waves-effect arrow-r"><i class="far fa-hand-pointer"></i>
-                  Instruction<i class="fas fa-angle-down rotate-icon"></i></a>
-                <div class="collapsible-body">
-                  <ul>
-                    <li><a href="#" class="waves-effect">For bloggers</a>
-                    </li>
-                    <li><a href="#" class="waves-effect">For authors</a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-eye"></i> About<i
-                    class="fas fa-angle-down rotate-icon"></i></a>
-                <div class="collapsible-body">
-                  <ul>
-                    <li><a href="#" class="waves-effect">Introduction</a>
-                    </li>
-                    <li><a href="#" class="waves-effect">Monthly meetings</a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li><a class="collapsible-header waves-effect arrow-r"><i class="far fa-envelope"></i> Contact me<i
-                    class="fas fa-angle-down rotate-icon"></i></a>
-                <div class="collapsible-body">
-                  <ul>
-                    <li><a href="#" class="waves-effect">FAQ</a>
-                    </li>
-                    <li><a href="#" class="waves-effect">Write a message</a>
-                    </li>
-                    <li><a href="#" class="waves-effect">FAQ</a>
-                    </li>
-                    <li><a href="#" class="waves-effect">Write a message</a>
-                    </li>
-                    <li><a href="#" class="waves-effect">FAQ</a>
-                    </li>
-                    <li><a href="#" class="waves-effect">Write a message</a>
-                    </li>
-                    <li><a href="#" class="waves-effect">FAQ</a>
-                    </li>
-                    <li><a href="#" class="waves-effect">Write a message</a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
-          </li>
           <!--/. Side navigation links -->
         </ul>
         <div class="sidenav-bg rgba-blue-strong"></div>
       </div>
+
+    <!-- CRUD sinh viên -->
     <div class="card">
         <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
-            Editable table
+            Sinh Viên
         </h3>
         <div class="card-body">
-            <div id="table" class="table-editable">
-                <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success">
+            <div id="table" class="table-student">
+            <form class="form-inline" >
+              <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
+              aria-label="Search">
+             <i class="fas fa-search" aria-hidden="true"></i>
+             <span class="table-add float-right mb-3 mr-2 ml-4"><a href="#!" class="text-success">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
                         <i
                             class="fas fa-plus fa-2x" aria-hidden="true"></i>
                       </button></a></span>
+            </form>
+                
                 <table class="table table-bordered table-responsive-md table-striped text-center">
                     <thead>
                         <tr>
-                            <th class="text-center">Person Name</th>
-                            <th class="text-center">Age</th>
-                            <th class="text-center">Company Name</th>
-                            <th class="text-center">Country</th>
-                            <th class="text-center">City</th>
-                            <th class="text-center">Remove</th>
+                            <th class="text-center">STT</th>
+                            <th class="text-center">Mã sinh viên</th>
+                            <th class="text-center">Họ và tên</th>
+                            <th class="text-center">Lớp</th>
+                            <th class="text-center">Ngày sinh</th>
+                            <th class="text-center">Địa chỉ</th>
+                            <th class="text-center">Email</th>
+                            <th class="text-center">Số điện thoại</th>
+                            <th class="text-center">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
+                      <!-- Viet ma PHP -->
                         <tr>
-                            <td class="pt-3-half">Aurelia Vega</td>
-                            <td class="pt-3-half">30</td>
-                            <td class="pt-3-half">Deepends</td>
-                            <td class="pt-3-half">Spain</td>
-                            <td class="pt-3-half">Madrid</td>
+                            <td class="pt-3-half">1</td>
+                            <td class="pt-3-half">B18DCCN189</td>
+                            <td class="pt-3-half">Đỗ Thị Thu Hà</td>
+                            <td class="pt-3-half">D18HTTT1</td>
+                            <td class="pt-3-half">2000-04-01</td>
+                            <td class="pt-3-half">Hà Nội</td>
+                            <td class="pt-3-half">dothithuha140@gmail.com</td>
+                            <td class="pt-3-half">0971452203</td>
                      
                             <td>
-                                <span class="table-remove"><button type="button"
-                                        class="btn btn-danger btn-rounded btn-sm my-0">
-                                        Remove
-                                    </button></span>
-                            </td>
-                        </tr>
-                        <!-- This is our clonable table line -->
-                        <tr>
-                            <td class="pt-3-half">Guerra Cortez</td>
-                            <td class="pt-3-half">45</td>
-                            <td class="pt-3-half">Insectus</td>
-                            <td class="pt-3-half">USA</td>
-                            <td class="pt-3-half">San Francisco</td>
-                     
-                            <td>
-                                <span class="table-remove"><button type="button"
-                                        class="btn btn-danger btn-rounded btn-sm my-0">
-                                        Remove
-                                    </button></span>
-                            </td>
-                        </tr>
-                        <!-- This is our clonable table line -->
-                        <tr>
-                            <td class="pt-3-half">Guadalupe House</td>
-                            <td class="pt-3-half">26</td>
-                            <td class="pt-3-half">Isotronic</td>
-                            <td class="pt-3-half">Germany</td>
-                            <td class="pt-3-half">Frankfurt am Main</td>
-                     
-                            <td>
-                                <span class="table-remove"><button type="button"
-                                        class="btn btn-danger btn-rounded btn-sm my-0">
-                                        Remove
-                                    </button></span>
-                            </td>
-                        </tr>
-                        <!-- This is our clonable table line -->
-                        <tr class="hide">
-                            <td class="pt-3-half">Elisa Gallagher</td>
-                            <td class="pt-3-half">31</td>
-                            <td class="pt-3-half">Portica</td>
-                            <td class="pt-3-half">United Kingdom</td>
-                            <td class="pt-3-half">London</td>
- 
-                            <td>
-                                <span class="table-remove"><button type="button"
+                            <span class="table-remove"><button type="button" data-toggle="modal" data-target="#basicExampleModal2"
                                     class="btn btn-primary btn-rounded btn-sm my-0">
                                     Edit
-                                </button><button type="button"
+                                </button><button type="button" 
                                         class="btn btn-danger btn-rounded btn-sm my-0">
                                         Remove
                                     </button></span>
                             </td>
                         </tr>
                     </tbody>
+
                 </table>
             </div>
         </div>
@@ -207,60 +90,649 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Thêm sinh viên</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" method = "post">
+                    <label for="basic-url">Họ và tên</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon1">@</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-                      </div>
-                      
-                      <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username"
-                          aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                          <span class="input-group-text" id="basic-addon2">@example.com</span>
-                        </div>
-                      </div>
-                      
-                      <label for="basic-url">Your vanity URL</label>
-                      <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Lớp</label>
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
                         </div>
-                        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-                      </div>
-                      
-                      <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Ngày sinh</label>
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                          <span class="input-group-text">$</span>
                         </div>
-                        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                        <div class="input-group-append">
-                          <span class="input-group-text">.00</span>
-                        </div>
-                      </div>
-                      
-                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Địa chỉ</label>
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                          <span class="input-group-text">With textarea</span>
                         </div>
-                        <textarea class="form-control" aria-label="With textarea"></textarea>
-                      </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Email</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Số điện thoại</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary">Lưu</button>
                 </div>
             </div>
         </div>
     </div>
     <!-- Editable table -->
+    <div class="modal fade" id="basicExampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">Chỉnh sửa thông tin sinh viên</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="basic-url">Họ và tên</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Lớp</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Ngày sinh</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Địa chỉ</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Email</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Số điện thoại</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary">Lưu thay đổi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- CRUD Môn học -->
+    <div class="card">
+        <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
+            Môn học theo kì học
+        </h3>
+        <div class="card-body">
+            <div id="table" class="table-subject">
+            <form class="form-inline" >
+              <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
+              aria-label="Search">
+             <i class="fas fa-search" aria-hidden="true"></i>
+             <span class="table-add float-right mb-3 mr-2 ml-4"><a href="#!" class="text-success">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal3">
+                        <i
+                            class="fas fa-plus fa-2x" aria-hidden="true"></i>
+                      </button></a></span>
+            </form>
+                <table class="table table-bordered table-responsive-md table-striped text-center">
+                    <thead>
+                        <tr>
+                            <th class="text-center">STT</th>
+                            <th class="text-center">Mã môn học</th>
+                            <th class="text-center">Tên môn học</th>
+                            <th class="text-center">Số tín chỉ</th>
+                            <th class="text-center">Giảng viên</th>
+                            <th class="text-center">Phòng học</th>
+                            <th class="text-center">Thứ</th>
+                            <th class="text-center">Tiết bắt đầu</th>
+                            <th class="text-center">Tiết Kết thúc</th>
+                            <th class="text-center">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Viet ma PHP -->
+                        <tr>
+                            <td class="pt-3-half">1</td>
+                            <td class="pt-3-half">INT1342M</td>
+                            <td class="pt-3-half">Phân tích và thiết kế hệ thống thông tin</td>
+                            <td class="pt-3-half">3</td>
+                            <td class="pt-3-half">T.Đ.Quế</td>
+                            <td class="pt-3-half">D18-061</td>
+                            <td class="pt-3-half">Ba</td>
+                            <td class="pt-3-half">9</td>
+                            <td class="pt-3-half">11</td>
+                            <td>
+                            <span class="table-remove"><button type="button" data-toggle="modal" data-target="#basicExampleModal4"
+                                    class="btn btn-primary btn-rounded btn-sm my-0">
+                                    Edit
+                                </button><button type="button" 
+                                        class="btn btn-danger btn-rounded btn-sm my-0">
+                                        Remove
+                                    </button></span>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="basicExampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Thêm môn học</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" method = "post">
+                    <label for="basic-url">Mã môn học</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Tên môn học</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Số tín chỉ</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Giảng viên</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Phòng học</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Thứ</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Tiết bắt đầu</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Tiết kết thúc</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Editable table -->
+    <div class="modal fade" id="basicExampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel4"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel4">Chỉnh sửa thông tin môn học</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="basic-url">Mã môn học</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Tên môn học</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Số tín chỉ</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Giảng viên</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Phòng học</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Thứ</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Tiết bắt đầu</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Tiết kết thúc</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary">Lưu thay đổi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- CRUD kỳ học -->
+    <div class="card">
+        <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
+            Kỳ học
+        </h3>
+        <div class="card-body">
+            <div id="table" class="table-subject">
+            <form class="form-inline" >
+              <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
+              aria-label="Search">
+             <i class="fas fa-search" aria-hidden="true"></i>
+             <span class="table-add float-right mb-3 mr-2 ml-4"><a href="#!" class="text-success">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal5">
+                        <i
+                            class="fas fa-plus fa-2x" aria-hidden="true"></i>
+                      </button></a></span>
+            </form>
+                
+                <table class="table table-bordered table-responsive-md table-striped text-center">
+                    <thead>
+                        <tr>
+                            <th class="text-center">STT</th>
+                            <th class="text-center">Mã kì học</th>
+                            <th class="text-center">Năm bắt đầu</th>
+                            <th class="text-center">Năm kết thúc</th>
+                            <th class="text-center">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Viet ma PHP -->
+                        <tr>
+                            <td class="pt-3-half">1</td>
+                            <td class="pt-3-half">Học kỳ 1</td>
+                            <td class="pt-3-half">2021</td>
+                            <td class="pt-3-half">2022</td>
+                            <td>
+                            <span class="table-remove"><button type="button" data-toggle="modal" data-target="#basicExampleModal6"
+                                    class="btn btn-primary btn-rounded btn-sm my-0">
+                                    Edit
+                                </button><button type="button" 
+                                        class="btn btn-danger btn-rounded btn-sm my-0">
+                                        Remove
+                                    </button></span>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="basicExampleModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Thêm kỳ học</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" method = "post">
+                    <label for="basic-url">Kì học</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Năm bắt đầu</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Năm kết thúc</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Editable table -->
+    <div class="modal fade" id="basicExampleModal6" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel4"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel4">Chỉnh sửa thông tin kỳ học</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="basic-url">Kỳ học</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Năm bắt đầu</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Năm kết thúc</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary">Lưu thay đổi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- CRUD điểm -->
+    <div class="card">
+        <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
+            Điểm của sinh viên
+        </h3>
+        <div class="card-body">
+            <div id="table" class="table-subject">
+            <form class="form-inline" >
+              <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
+              aria-label="Search">
+             <i class="fas fa-search" aria-hidden="true"></i>
+             <span class="table-add float-right mb-3 mr-2 ml-4"><a href="#!" class="text-success">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal8">
+                        <i
+                            class="fas fa-plus fa-2x" aria-hidden="true"></i>
+                      </button></a></span>
+            </form>
+            <div class ="row" style = "justify-content: center">
+                <div class = "col-3">
+                <label for="basic-url">Nhập học kì xem điểm thi (vd 20211)</label>
+                <div class="input-group mb-3 ">
+                    <input type="text" class="form-control" placeholder="" aria-label="Recipient's username"
+                        aria-describedby="button-addon2" />
+                    <button class="btn-outline-primary ml-2" type="button" data-mdb-ripple-color="dark">
+                        Xem
+                    </button>
+                    </div>
+            </div>
+            </div>
+                <table class="table table-bordered table-responsive-md table-striped text-center">
+                    <thead>
+                        <tr>
+                            <th class="text-center">STT</th>
+                            <th class="text-center">Mã sinh viên</th>
+                            <th class="text-center">Tên sinh viên</th>
+                            <th class="text-center">Mã môn học</th>
+                            <th class="text-center">Tên môn học</th>
+                            <th class="text-center">Kỳ học</th>
+                            <th class="text-center">Điểm CC</th>
+                            <th class="text-center">Điểm BT</th>
+                            <th class="text-center">Điểm TH</th>
+                            <th class="text-center">Điểm thi</th>
+                            <th class="text-center">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Viet ma PHP -->
+                        <tr>
+                            <td class="pt-3-half">1</td>
+                            <td class="pt-3-half">B18DCCN189</td>
+                            <td class="pt-3-half">Đỗ Thị Thu Hà</td>
+                            <td class="pt-3-half">INT1342M</td>
+                            <td class="pt-3-half">Phân tích và thiết kế hệ thống thông tin</td>
+                            <td class="pt-3-half">Học kì 1</td>
+                            <td class="pt-3-half">10</td>
+                            <td class="pt-3-half">8</td>
+                            <td class="pt-3-half"></td>
+                            <td class="pt-3-half">8.5</td>
+                            <td>
+                            <span class="table-remove"><button type="button" data-toggle="modal" data-target="#basicExampleModal7"
+                                    class="btn btn-primary btn-rounded btn-sm my-0">
+                                    Edit
+                                </button><button type="button" 
+                                        class="btn btn-danger btn-rounded btn-sm my-0">
+                                        Remove
+                                    </button></span>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="basicExampleModal8" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel6"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel6">Thêm điểm</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" method = "post">
+                    <label for="basic-url">Mã sinh viên</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Tên sinh viên</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Mã môn học</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Tên môn học</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Kỳ học</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Điểm CC</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Điểm BT</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Điểm TH</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Điểm thi</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Editable table -->
+    <div class="modal fade" id="basicExampleModal7" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel7"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel7">Chỉnh sửa điểm</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="basic-url">Mã sinh viên</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Tên sinh viên</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Tên môn học</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Kỳ học</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Điểm CC</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Điểm BT</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Điểm TH</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="basic-url">Điểm thi</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary">Lưu thay đổi</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- JQuery -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Bootstrap tooltips -->

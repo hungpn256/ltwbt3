@@ -398,6 +398,12 @@
                                             </div>
                                             <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                         </div>
+                                        <label for="basic-url">Mã môn học</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                        </div>
                                         <label for="basic-url">Tên môn học</label>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">

@@ -52,6 +52,16 @@
             <span class="fs-6">Điểm sinh viên</span></a>
     </li>
     <li class="nav-item">
+        <a class="nav-link fs-5" href="semester.php">
+
+            <span class="fs-6">Kỳ học</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link fs-5" href="subject.php">
+
+            <span class="fs-6">Môn học</span></a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link fs-5" href="kyhocmonhoc.php">
 
             <span class="fs-6">Kỳ học - Môn học</span></a>

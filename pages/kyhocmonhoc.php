@@ -127,7 +127,7 @@
                 <div class="container-fluid">
 
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">BẢNG QUẢN LÝ BẢNG TIN</h1>
+                        <h1 class="h3 mb-0 text-gray-800">BẢNG QUẢN LÝ Kỳ học - Môn học</h1>
                     </div>      
 
                     

@@ -52,23 +52,6 @@ if (!empty($_POST)) {
     execute($sql);
     header('Location: student.php');
 }
-$id = '';
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $sql = 'select * from user where id = ' . $id;
-    $studentList = executeResult($sql);
-    if ($studentList != null && count($studentList) > 0) {
-        $std        = $studentList[0];
-        $s_maSV = $std['maSV'];
-        $s_name = $std['name'];
-        $s_gender = $std['gender'];
-        $s_email = $std['email'];
-        $s_phone = $std['phone'];
-        $s_classID = $std['classID'];
-    } else {
-        $id = '';
-    }
-}
 ?>
 
 
@@ -93,6 +76,8 @@ if (isset($_GET['id'])) {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -107,7 +92,7 @@ if (isset($_GET['id'])) {
                 <div>
                     <?php include_once("topbar.php"); ?>
                 </div>
-                <div class="container-fluid" >
+                <div class="container-fluid">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h3 class="h3 mb-0 text-gray-800">BẢNG QUẢN LÝ SINH VIÊN</h3>
                     </div>
@@ -148,32 +133,52 @@ if (isset($_GET['id'])) {
                                             }
                                             $studentList = executeResult($sql);
                                             $index = 1;
-                                            foreach ($studentList as $std) {
-                                                echo '<tr>
-                                                        <td>' . ($index++) . '</td>
-                                                        <td>' . $std['maSV'] . '</td>
-                                                        <td>' . $std['name'] . '</td>
-                                                        <td>' . $std['gender'] . '</td>
-                                                        <td>' . $std['email'] . '</td>
-                                                        <td>' . $std['phone'] . '</td>
-                                                        <td>' . $std['classID'] . '</td>
+                                            ?>
+
+                                            <?php foreach ($studentList as $std) : ?>
+                                                <form>
+                                                    <input value="<?= $std['id'] ?>" type="hidden" name="id">
+                                                    <tr>
+                                                        <td><?= ($index++) ?></td>
+                                                        <td><?= $std['maSV'] ?></td>
+                                                        <td><?= $std['name'] ?></td>
+                                                        <td><?= $std['gender'] ?></td>
+                                                        <td><?= $std['email'] ?></td>
+                                                        <td><?= $std['phone'] ?></td>
+                                                        <td><?= $std['classID'] ?></td>
                                                         <td>
-                                                        <span class="table-remove">
-                                                            <form method="GET">
-                                                                <input value="' . $std["id"] . '" type="hidden" name="id">
-                                                                <button data-toggle="modal" data-target="#basicExampleModal2" class="btn btn-primary btn-rounded btn-sm my-0" type="submmit">
+                                                            <span class="table-remove">
+                                                                <button data-toggle="modal" data-target="#basicExampleModal2" id="edit<?= $std['id'] ?>" class="btn btn-primary btn-rounded btn-sm my-0" name="edit">
                                                                     Edit
                                                                 </button>
-                                                            </form>
-
-                                                            <button type="button" class="btn btn-danger btn-rounded btn-sm my-0" >
-                                                                Remove
-                                                            </button>
-                                                        </span>
+                                                                <button type="button" class="btn btn-danger btn-rounded btn-sm my-0" name="remove">
+                                                                    Remove
+                                                                </button>
+                                                            </span>
                                                         </td>
-		                                            </tr>';
-                                            }
-                                            ?>
+                                                    </tr>
+                                                    <script>
+                                                        $(document).ready(function() {
+                                                            $('#edit<?= $std['id'] ?>').click(function(e) {
+                                                                console.log(<?= $std['id'] ?>)
+                                                                e.preventDefault();
+                                                                $.ajax({
+                                                                    url: '../controllers/edit_student.php',
+                                                                    data: {
+                                                                        'id': <?= $std['id'] ?>
+                                                                    },
+                                                                    type: 'POST',    
+                                                                    success: function(result){
+                                                                        console.log(result)
+                                                                        $('#modal-content').html(result)
+                                                                    }                                                         
+                                                                })
+                                                            });
+                                                        });
+                                                    </script>
+                                                </form>
+                                            <?php endforeach ?>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -236,55 +241,8 @@ if (isset($_GET['id'])) {
                         <!-- Editable table -->
                         <div class="modal fade show" id="basicExampleModal2" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
                             <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel2">Chỉnh sửa thông tin sinh viên</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form method="post">
-                                            <label for="basic-url">Mã sinh viên</label>
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                </div>
-                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="maSV" value="<?= $s_maSV ?>">
-                                            </div>
-                                            <label for="basic-url">Họ và tên</label>
-                                            <input type="number" name="id" value="<?= $id ?>" style="display: none;">
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                </div>
-                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="name" value="<?= $s_name ?>">
-                                            </div>
-                                            <label for="basic-url">Giới tính</label>
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                </div>
-                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="gender" value="<?= $s_gender ?>">
-                                            </div>
-                                            <label for="basic-url">Email</label>
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                </div>
-                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="email" value="<?= $s_email ?>">
-                                            </div>
-                                            <label for="basic-url">Số điện thoại</label>
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                </div>
-                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="phone" value="<?= $s_phone ?>">
-                                            </div>
-                                            <label for="basic-url">Lớp</label>
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                </div>
-                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="classID" value="<?= $s_classID ?>">
-                                            </div>
-                                            <button class="btn btn-primary">Lưu thay đổi</button>
-                                        </form>
-                                    </div>
+                                <div class="modal-content" id="modal-content">
+                                    
                                 </div>
                             </div>
                         </div>
@@ -321,8 +279,7 @@ if (isset($_GET['id'])) {
     <script src="../components/vendor/chart.js/Chart.min.js"></script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <script src="../components/js/demo/chart-pie-demo.js"></script>
-    <!-- JQuery -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <!-- Bootstrap tooltips -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
     <!-- Bootstrap core JavaScript -->

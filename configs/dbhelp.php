@@ -6,11 +6,9 @@ require_once ('../configs/config.php');
  */
 function execute($sql) {
 	//create connection toi database
-	$conn = mysqli_connect(HOST, USERNAME, PASSWORD, DATABASE);
-
+	$conn = new mysqli(HOST, USERNAME, PASSWORD, DATABASE);
 	//query
 	mysqli_query($conn, $sql);
-
 	//dong connection
 	mysqli_close($conn);
 }
@@ -20,7 +18,7 @@ function execute($sql) {
  */
 function executeResult($sql) {
 	//create connection toi database
-	$conn = mysqli_connect(HOST, USERNAME, PASSWORD, DATABASE);
+	$conn = new mysqli(HOST, USERNAME, PASSWORD, DATABASE);
 
 	//query
 	$resultset = mysqli_query($conn, $sql);

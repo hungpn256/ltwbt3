@@ -1,3 +1,74 @@
+<?php
+require_once('../configs/dbhelp.php');
+$s_maSV = $s_name = $s_gender = $s_email = $s_phone = $s_classID = '';
+
+if (!empty($_POST)) {
+    $s_id = '';
+
+    if (isset($_POST['maSV'])) {
+        $s_maSV = $_POST['maSV'];
+    }
+
+    if (isset($_POST['name'])) {
+        $s_name = $_POST['name'];
+    }
+
+    if (isset($_POST['gender'])) {
+        $s_gender = $_POST['gender'];
+    }
+
+    if (isset($_POST['email'])) {
+        $s_email = $_POST['email'];
+    }
+
+    if (isset($_POST['phone'])) {
+        $s_phone = $_POST['phone'];
+    }
+
+    if (isset($_POST['classID'])) {
+        $s_classID = $_POST['classID'];
+    }
+
+    if (isset($_POST['id'])) {
+        $s_id = $_POST['id'];
+    }
+    $s_maSV = str_replace('\'', '\\\'', $s_maSV);
+    $s_name = str_replace('\'', '\\\'', $s_name);
+    $s_gender = str_replace('\'', '\\\'', $s_gender);
+    $s_email = str_replace('\'', '\\\'', $s_email);
+    $s_phone = str_replace('\'', '\\\'', $s_phone);
+    $s_classID = str_replace('\'', '\\\'', $s_classID);
+    $s_id = str_replace('\'', '\\\'', $s_id);
+
+    if ($s_id != '') {
+        //update
+        $sql = "update user set maSV = '$s_maSV', name = '$s_name', gender = '$s_gender', email = '$s_email', phone = '$s_phone', classID = '$s_classID' where id = " . $s_id;
+    } else {
+        //insert
+        $sql = "insert into user(maSV, name, gender, email, phone, classID) value ('$s_maSV', '$s_name', '$s_gender','$s_email','$s_phone','$s_classID')";
+    }
+
+    execute($sql);
+    header('Location: student.php');
+}
+$id = '';
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $sql = 'select * from user where id = ' . $id;
+    $studentList = executeResult($sql);
+    if ($studentList != null && count($studentList) > 0) {
+        $std        = $studentList[0];
+        $s_maSV = $std['maSV'];
+        $s_name = $std['name'];
+        $s_gender = $std['gender'];
+        $s_email = $std['email'];
+        $s_phone = $std['phone'];
+        $s_classID = $std['classID'];
+    } else {
+        $id = '';
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -247,15 +318,14 @@
                             <div class="card-body">
                                 <div id="table" class="table-student">
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <form class="form-inline">
-                                            <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search">
+                                        <form class="form-inline" method="get" action="">
+                                            <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Tìm kiếm theo tên">
                                             <i class="fas fa-search" aria-hidden="true"></i>
-                                            
                                         </form>
                                         <span class="table-add float-right mb-3 mr-2 ml-4"><a href="#!" class="text-success">
-                                                    <button type="button" class="btn btn-primary btn-rounded btn-sm" data-toggle="modal" data-target="#basicExampleModal">
-                                                        <i class="fas fa-plus fa-2x" aria-hidden="true"></i>
-                                                    </button></a></span>
+                                                <button type="button" class="btn btn-primary btn-rounded btn-sm" data-toggle="modal" data-target="#basicExampleModal">
+                                                    <i class="fas fa-plus fa-2x" aria-hidden="true"></i>
+                                                </button></a></span>
                                     </div>
 
                                     <table class="table table-bordered table-responsive-md table-striped text-center">
@@ -264,36 +334,49 @@
                                                 <th class="text-center">STT</th>
                                                 <th class="text-center">Mã sinh viên</th>
                                                 <th class="text-center">Họ và tên</th>
-                                                <th class="text-center">Lớp</th>
-                                                <th class="text-center">Ngày sinh</th>
-                                                <th class="text-center">Địa chỉ</th>
+                                                <th class="text-center">Giới tính</th>
                                                 <th class="text-center">Email</th>
                                                 <th class="text-center">Số điện thoại</th>
+                                                <th class="text-center">Lớp</th>
                                                 <th class="text-center">Thao tác</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <!-- Viet ma PHP -->
-                                            <tr>
-                                                <td class="pt-3-half">1</td>
-                                                <td class="pt-3-half">B18DCCN189</td>
-                                                <td class="pt-3-half">Đỗ Thị Thu Hà</td>
-                                                <td class="pt-3-half">D18HTTT1</td>
-                                                <td class="pt-3-half">2000-04-01</td>
-                                                <td class="pt-3-half">Hà Nội</td>
-                                                <td class="pt-3-half">dothithuha140@gmail.com</td>
-                                                <td class="pt-3-half">0971452203</td>
+                                            <?php
+                                            if (isset($_GET['s']) && $_GET['s'] != '') {
+                                                $sql = 'select id,maSV,name,gender,email,phone,classID from user where name like "%' . $_GET['s'] . '%"';
+                                            } else {
+                                                $sql = 'select id,maSV,name,gender,email,phone,classID from user';
+                                            }
+                                            $studentList = executeResult($sql);
+                                            $index = 1;
+                                            foreach ($studentList as $std) {
+                                                echo '<tr>
+                                                        <td>' . ($index++) . '</td>
+                                                        <td>' . $std['maSV'] . '</td>
+                                                        <td>' . $std['name'] . '</td>
+                                                        <td>' . $std['gender'] . '</td>
+                                                        <td>' . $std['email'] . '</td>
+                                                        <td>' . $std['phone'] . '</td>
+                                                        <td>' . $std['classID'] . '</td>
+                                                        <td>
+                                                        <span class="table-remove">
+                                                            <form method="GET">
+                                                                <input value="' .$std["id"] . '" type="hidden" name="id">
+                                                                <button data-toggle="modal" data-target="#basicExampleModal2" class="btn btn-primary btn-rounded btn-sm my-0" type="submmit">
+                                                                    Edit
+                                                                </button>
+                                                            </form>
 
-                                                <td>
-                                                    <span class="table-remove"><button type="button" data-toggle="modal" data-target="#basicExampleModal2" class="btn btn-primary btn-rounded btn-sm my-0">
-                                                            Edit
-                                                        </button><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">
-                                                            Remove
-                                                        </button></span>
-                                                </td>
-                                            </tr>
+                                                            <button type="button" class="btn btn-danger btn-rounded btn-sm my-0" >
+                                                                Remove
+                                                            </button>
+                                                        </span>
+                                                        </td>
+		                                            </tr>';
+                                            }
+                                            ?>
                                         </tbody>
-
                                     </table>
                                 </div>
                             </div>
@@ -307,59 +390,53 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body" method="post">
-                                        <label for="basic-url">Mã sinh viên</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
+                                    <div class="modal-body">
+                                        <form method="post" action="">
+                                            <label for="basic-url">Mã sinh viên</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                </div>
+                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="maSV" value="<?= $s_maSV ?>">
                                             </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                        <label for="basic-url">Họ và tên</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
+                                            <label for="basic-url">Họ và tên</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                </div>
+                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="name" value="<?= $s_name ?>">
                                             </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                        <label for="basic-url">Lớp</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
+                                            <label for="basic-url">Giới tính</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                </div>
+                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="gender" value="<?= $s_gender ?>">
                                             </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                        <label for="basic-url">Ngày sinh</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
+                                            <label for="basic-url">Email</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                </div>
+                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="email" value="<?= $s_email ?>">
                                             </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                        <label for="basic-url">Địa chỉ</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
+                                            <label for="basic-url">Số điện thoại</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                </div>
+                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="phone" value="<?= $s_phone ?>">
                                             </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                        <label for="basic-url">Email</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
+                                            <label for="basic-url">Lớp</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                </div>
+                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="classID" value="<?= $s_classID ?>">
                                             </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                        <label for="basic-url">Số điện thoại</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                            </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
+                                            <button class="btn btn-primary">Lưu</button>
+                                        </form>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                                        <button type="button" class="btn btn-primary">Lưu</button>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
                         <!-- Editable table -->
-                        <div class="modal fade" id="basicExampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+                        <div class="modal fade show" id="basicExampleModal2" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -369,46 +446,46 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <label for="basic-url">Họ và tên</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
+                                        <form method="post">
+                                            <label for="basic-url">Mã sinh viên</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                </div>
+                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="maSV" value="<?= $s_maSV ?>">
                                             </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                        <label for="basic-url">Lớp</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
+                                            <label for="basic-url">Họ và tên</label>
+                                            <input type="number" name="id" value="<?= $id ?>" style="display: none;">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                </div>
+                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="name" value="<?= $s_name ?>">
                                             </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                        <label for="basic-url">Ngày sinh</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
+                                            <label for="basic-url">Giới tính</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                </div>
+                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="gender" value="<?= $s_gender ?>">
                                             </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                        <label for="basic-url">Địa chỉ</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
+                                            <label for="basic-url">Email</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                </div>
+                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="email" value="<?= $s_email ?>">
                                             </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                        <label for="basic-url">Email</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
+                                            <label for="basic-url">Số điện thoại</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                </div>
+                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="phone" value="<?= $s_phone ?>">
                                             </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                        <label for="basic-url">Số điện thoại</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
+                                            <label for="basic-url">Lớp</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                </div>
+                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="classID" value="<?= $s_classID ?>">
                                             </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                                        <button type="button" class="btn btn-primary">Lưu thay đổi</button>
+                                            <button class="btn btn-primary">Lưu thay đổi</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -417,48 +494,60 @@
                 </div>
             </div>
         </div>
-    </div>
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Bạn muốn dăng xuất?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body"> </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
-                    <a class="btn btn-primary" href="login.html">Đăng xuất</a>
+        <script type="text/javascript">
+            function deleteStudent(id) {
+                option = confirm('Bạn có muốn xoá sinh viên này không')
+                if (!option) {
+                    return;
+                }
+
+                console.log(id)
+                $.post('delete_student.php', {
+                    'id': id
+                }, function(data) {
+                    alert(data)
+                    location.reload()
+                })
+            }
+        </script>
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Bạn muốn dăng xuất?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body"> </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+                        <a class="btn btn-primary" href="login.html">Đăng xuất</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="../components/vendor/jquery/jquery.min.js"></script>
-    <script src="../components/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../components/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="../components/js/sb-admin-2.min.js"></script>
-    <script src="../components/vendor/chart.js/Chart.min.js"></script>
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-    <script src="../components/js/demo/chart-pie-demo.js"></script>
-    <!-- JQuery -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="../components/vendor/jquery/jquery.min.js"></script>
+        <script src="../components/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../components/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="../components/js/sb-admin-2.min.js"></script>
+        <script src="../components/vendor/chart.js/Chart.min.js"></script>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <script src="../components/js/demo/chart-pie-demo.js"></script>
+        <!-- JQuery -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
         <script type="text/javascript" src="js/mdb.min.js"></script>
 </body>
 

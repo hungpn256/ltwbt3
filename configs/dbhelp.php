@@ -6,9 +6,9 @@ require_once ('../configs/config.php');
  */
 function execute($sql) {
 	//create connection toi database
-	$conn = new mysqli(HOST, USERNAME, PASSWORD, DATABASE);
+	$conn = new mysqli(HOST, USERNAME, PASSWORD, DATABASE) ;
 	//query
-	mysqli_query($conn, $sql);
+	mysqli_query($conn, $sql) or die( mysqli_error($conn));
 	//dong connection
 	mysqli_close($conn);
 }
@@ -21,9 +21,9 @@ function executeResult($sql) {
 	$conn = new mysqli(HOST, USERNAME, PASSWORD, DATABASE);
 
 	//query
-	$resultset = mysqli_query($conn, $sql);
+	$resultset = mysqli_query($conn, $sql) or die( mysqli_error($conn));
 	$list      = [];
-	while ($row = mysqli_fetch_array($resultset, 1)) {
+	while ($row = mysqli_fetch_array($resultset, 1) ) {
 		$list[] = $row;
 	}
 

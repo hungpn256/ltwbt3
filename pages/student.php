@@ -102,12 +102,12 @@ if (isset($_GET['id'])) {
         include_once("sidebar.php");
         ?>
 
-        <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content-wrapper" class="d-flex flex-column" style="height:100vh; overflow-y:scroll">
             <div id="content">
                 <div>
                     <?php include_once("topbar.php"); ?>
                 </div>
-                <div class="container-fluid">
+                <div class="container-fluid" >
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h3 class="h3 mb-0 text-gray-800">BẢNG QUẢN LÝ SINH VIÊN</h3>
                     </div>
@@ -116,9 +116,9 @@ if (isset($_GET['id'])) {
                             <div class="card-body">
                                 <div id="table" class="table-student">
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <form class="form-inline" method="get" action="">
-                                            <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Tìm kiếm theo tên">
-                                            <i class="fas fa-search" aria-hidden="true"></i>
+                                        <form class="form-inline" method="get">
+                                            <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Tìm kiếm theo tên" name="s">
+                                            <i class="fas fa-search" aria-hidden="true" type="submit"></i>
                                         </form>
                                         <span class="table-add float-right mb-3 mr-2 ml-4"><a href="#!" class="text-success">
                                                 <button type="button" class="btn btn-primary btn-rounded btn-sm" data-toggle="modal" data-target="#basicExampleModal">

@@ -1,56 +1,41 @@
 <?php
 // include_once("../controllers/requireLogin.php");
 require_once('../configs/dbhelp.php');
-$s_maSV = $s_name = $s_gender = $s_email = $s_phone = $s_classID = '';
+$s_maMH = $s_name = $s_numberOfCreadits = '';
 
 if (!empty($_POST)) {
     $s_id = '';
 
-    if (isset($_POST['maSV'])) {
-        $s_maSV = $_POST['maSV'];
+    if (isset($_POST['maMH'])) {
+        $s_maMH = $_POST['maMH'];
     }
 
     if (isset($_POST['name'])) {
         $s_name = $_POST['name'];
     }
 
-    if (isset($_POST['gender'])) {
-        $s_gender = $_POST['gender'];
-    }
-
-    if (isset($_POST['email'])) {
-        $s_email = $_POST['email'];
-    }
-
-    if (isset($_POST['phone'])) {
-        $s_phone = $_POST['phone'];
-    }
-
-    if (isset($_POST['classID'])) {
-        $s_classID = $_POST['classID'];
-    }
+    if (isset($_POST['numberOfCreadits'])) {
+        $s_numberOfCreadits = $_POST['numberOfCreadits'];
+    } 
 
     if (isset($_POST['id'])) {
         $s_id = $_POST['id'];
     }
-    $s_maSV = str_replace('\'', '\\\'', $s_maSV);
+    $s_maMH = str_replace('\'', '\\\'', $s_maMH);
     $s_name = str_replace('\'', '\\\'', $s_name);
-    $s_gender = str_replace('\'', '\\\'', $s_gender);
-    $s_email = str_replace('\'', '\\\'', $s_email);
-    $s_phone = str_replace('\'', '\\\'', $s_phone);
-    $s_classID = str_replace('\'', '\\\'', $s_classID);
+    $s_numberOfCreadits = str_replace('\'', '\\\'', $s_numberOfCreadits);
     $s_id = str_replace('\'', '\\\'', $s_id);
 
     if ($s_id != '') {
         //update
-        $sql = "update user set maSV = '$s_maSV', name = '$s_name', gender = '$s_gender', email = '$s_email', phone = '$s_phone', classID = '$s_classID' where id = " . $s_id;
+        $sql = "update subject set maMH = '$s_maMH', name = '$s_name', numberOfCreadits = '$s_numberOfCreadits' where id = " . $s_id;
     } else {
         //insert
-        $sql = "insert into user(maSV, name, gender, email, phone, classID) value ('$s_maSV', '$s_name', '$s_gender','$s_email','$s_phone','$s_classID')";
+        $sql = "insert into subject(maMH, name, numberOfCreadits) value ('$s_maMH', '$s_name', '$s_numberOfCreadits')";
     }
 
     execute($sql);
-    header('Location: student.php');
+    header('Location: subject.php');
 }
 ?>
 
@@ -94,7 +79,7 @@ if (!empty($_POST)) {
                 </div>
                 <div class="container-fluid">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h3 class="h3 mb-0 text-gray-800">BẢNG QUẢN LÝ SINH VIÊN</h3>
+                        <h3 class="h3 mb-0 text-gray-800">BẢNG QUẢN LÝ MÔN HỌC</h3>
                     </div>
                     <div class="row">
                         <div class="card">
@@ -115,43 +100,37 @@ if (!empty($_POST)) {
                                         <thead>
                                             <tr>
                                                 <th class="text-center">STT</th>
-                                                <th class="text-center">Mã sinh viên</th>
-                                                <th class="text-center">Họ và tên</th>
-                                                <th class="text-center">Giới tính</th>
-                                                <th class="text-center">Email</th>
-                                                <th class="text-center">Số điện thoại</th>
-                                                <th class="text-center">Lớp</th>
+                                                <th class="text-center">Mã môn học</th>
+                                                <th class="text-center">Tên môn học</th>
+                                                <th class="text-center">Số tín chỉ</th>
                                                 <th class="text-center">Thao tác</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                             if (isset($_GET['s']) && $_GET['s'] != '') {
-                                                $sql = 'select id,maSV,name,gender,email,phone,classID from user where name like "%' . $_GET['s'] . '%"';
+                                                $sql = 'select id,maMH,name,numberOfCreadits from subject where name like "%' . $_GET['s'] . '%"';
                                             } else {
-                                                $sql = 'select id,maSV,name,gender,email,phone,classID from user';
+                                                $sql = 'select id,maMH,name,numberOfCreadits from subject';
                                             }
-                                            $studentList = executeResult($sql);
+                                            $subjectList = executeResult($sql);
                                             $index = 1;
                                             ?>
 
-                                            <?php foreach ($studentList as $std) : ?>
+                                            <?php foreach ($subjectList as $std) : ?>
                                                 <form>
                                                     <input value="<?= $std['id'] ?>" type="hidden" name="id">
                                                     <tr>
                                                         <td><?= ($index++) ?></td>
-                                                        <td><?= $std['maSV'] ?></td>
+                                                        <td><?= $std['maMH'] ?></td>
                                                         <td><?= $std['name'] ?></td>
-                                                        <td><?= $std['gender'] ?></td>
-                                                        <td><?= $std['email'] ?></td>
-                                                        <td><?= $std['phone'] ?></td>
-                                                        <td><?= $std['classID'] ?></td>
+                                                        <td><?= $std['numberOfCreadits'] ?></td>
                                                         <td>
                                                             <span class="table-remove">
                                                                 <button data-toggle="modal" data-target="#basicExampleModal2" id="edit<?= $std['id'] ?>" class="btn btn-primary btn-rounded btn-sm my-0" name="edit">
                                                                     Edit
                                                                 </button>
-                                                                <button type="button" class="btn btn-danger btn-rounded btn-sm my-0" name="remove" onclick="deleteStudent($std['id'])">
+                                                                <button type="button" class="btn btn-danger btn-rounded btn-sm my-0" name="remove">
                                                                     Remove
                                                                 </button>
                                                             </span>
@@ -163,7 +142,7 @@ if (!empty($_POST)) {
                                                                 console.log(<?= $std['id'] ?>)
                                                                 e.preventDefault();
                                                                 $.ajax({
-                                                                    url: '../controllers/edit_student.php',
+                                                                    url: '../controllers/edit_subject.php',
                                                                     data: {
                                                                         'id': <?= $std['id'] ?>
                                                                     },
@@ -188,49 +167,32 @@ if (!empty($_POST)) {
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Thêm sinh viên</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Thêm môn học</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
                                         <form method="post" action="">
-                                            <label for="basic-url">Mã sinh viên</label>
+                                            <label for="basic-url">Mã môn học</label>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
                                                 </div>
-                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="maSV" value="<?= $s_maSV ?>">
+                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="maMH" value="<?= $s_maMH ?>">
                                             </div>
-                                            <label for="basic-url">Họ và tên</label>
+                                            <label for="basic-url">Tên môn học</label>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
                                                 </div>
                                                 <input type="text" class="form-control" aria-describedby="basic-addon1" name="name" value="<?= $s_name ?>">
                                             </div>
-                                            <label for="basic-url">Giới tính</label>
+                                            <label for="basic-url">Số tín chỉ</label>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
                                                 </div>
-                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="gender" value="<?= $s_gender ?>">
+                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="numberOfCreadits" value="<?= $s_numberOfCreadits ?>">
                                             </div>
-                                            <label for="basic-url">Email</label>
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                </div>
-                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="email" value="<?= $s_email ?>">
-                                            </div>
-                                            <label for="basic-url">Số điện thoại</label>
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                </div>
-                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="phone" value="<?= $s_phone ?>">
-                                            </div>
-                                            <label for="basic-url">Lớp</label>
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                </div>
-                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="classID" value="<?= $s_classID ?>">
-                                            </div>
+                                            
                                             <button class="btn btn-primary">Lưu</button>
                                         </form>
                                     </div>

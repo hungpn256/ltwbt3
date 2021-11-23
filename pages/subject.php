@@ -130,7 +130,7 @@ if (!empty($_POST)) {
                                                                 <button data-toggle="modal" data-target="#basicExampleModal2" id="edit<?= $std['id'] ?>" class="btn btn-primary btn-rounded btn-sm my-0" name="edit">
                                                                     Edit
                                                                 </button>
-                                                                <button type="button" class="btn btn-danger btn-rounded btn-sm my-0" name="remove">
+                                                                <button type="button" class="btn btn-danger btn-rounded btn-sm my-0" name="remove" onclick="deleteS(<?= $std['id'] ?>)">
                                                                     Remove
                                                                 </button>
                                                             </span>
@@ -213,8 +213,8 @@ if (!empty($_POST)) {
             </div>
         </div>
         <script type="text/javascript">
-            function deleteStudent(id) {
-                option = confirm('Bạn có muốn xoá sinh viên này không')
+            function deleteS(id) {
+                option = confirm('Bạn có muốn xoá môn học này không')
                 if (!option) {
                     return;
                 }

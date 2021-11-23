@@ -6,7 +6,7 @@ if (isset($_POST['register'])) {
         // header("location:". DOMAIN . "/pages/register.php", true, 301);
     } else {
         try {
-            $pre_stm = $con->prepare("INSERT INTO Admin(username,password,name) VALUES (?,?,?)");
+            $pre_stm = $con->prepare("INSERT INTO admin(username,password,name) VALUES (?,?,?)");
             $pre_stm->bind_param("sss", $_POST['username'], $_POST['password'], $_POST['name']);
             $pre_stm->execute();
 

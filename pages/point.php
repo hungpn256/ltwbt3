@@ -1,5 +1,5 @@
 <?php
-    
+    include_once("../controllers/requireLogin.php");
 ?>
 
 <!DOCTYPE html>

@@ -1,5 +1,5 @@
 <?php
-// include_once("../controllers/requireLogin.php");
+include_once("../controllers/requireLogin.php");
 require_once('../configs/dbhelp.php');
 $s_maSV = $s_name = $s_gender = $s_email = $s_phone = $s_classID = '';
 
@@ -48,9 +48,7 @@ if (!empty($_POST)) {
         //insert
         $sql = "insert into user(maSV, name, gender, email, phone, classID) value ('$s_maSV', '$s_name', '$s_gender','$s_email','$s_phone','$s_classID')";
     }
-
     execute($sql);
-    header('Location: student.php');
 }
 ?>
 
@@ -105,10 +103,13 @@ if (!empty($_POST)) {
                                             <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Tìm kiếm theo tên" name="s">
                                             <i class="fas fa-search" aria-hidden="true" type="submit"></i>
                                         </form>
-                                        <span class="table-add float-right mb-3 mr-2 ml-4"><a href="#!" class="text-success">
+                                        <span class="table-add float-right mb-3 mr-2 ml-4">
+                                            <a href="#!" class="text-success">
                                                 <button type="button" class="btn btn-primary btn-rounded btn-sm" data-toggle="modal" data-target="#basicExampleModal">
                                                     <i class="fas fa-plus fa-2x" aria-hidden="true"></i>
-                                                </button></a></span>
+                                                </button>
+                                            </a>
+                                        </span>
                                     </div>
 
                                     <table class="table table-bordered table-responsive-md table-striped text-center">
@@ -136,47 +137,25 @@ if (!empty($_POST)) {
                                             ?>
 
                                             <?php foreach ($studentList as $std) : ?>
-                                                <form>
-                                                    <input value="<?= $std['id'] ?>" type="hidden" name="id">
-                                                    <tr>
-                                                        <td><?= ($index++) ?></td>
-                                                        <td><?= $std['maSV'] ?></td>
-                                                        <td><?= $std['name'] ?></td>
-                                                        <td><?= $std['gender'] ?></td>
-                                                        <td><?= $std['email'] ?></td>
-                                                        <td><?= $std['phone'] ?></td>
-                                                        <td><?= $std['classID'] ?></td>
-                                                        <td>
-                                                            <span class="table-remove">
-                                                                <button data-toggle="modal" data-target="#basicExampleModal2" id="edit<?= $std['id'] ?>" class="btn btn-primary btn-rounded btn-sm my-0" name="edit">
-                                                                    Edit
-                                                                </button>
-                                                                <button type="button" class="btn btn-danger btn-rounded btn-sm my-0" name="remove" onclick="deleteStudent($std['id'])">
-                                                                    Remove
-                                                                </button>
-                                                            </span>
-                                                        </td>
-                                                    </tr>
-                                                    <script>
-                                                        $(document).ready(function() {
-                                                            $('#edit<?= $std['id'] ?>').click(function(e) {
-                                                                console.log(<?= $std['id'] ?>)
-                                                                e.preventDefault();
-                                                                $.ajax({
-                                                                    url: '../controllers/edit_student.php',
-                                                                    data: {
-                                                                        'id': <?= $std['id'] ?>
-                                                                    },
-                                                                    type: 'POST',
-                                                                    success: function(result) {
-                                                                        console.log(result)
-                                                                        $('#modal-content').html(result)
-                                                                    }
-                                                                })
-                                                            });
-                                                        });
-                                                    </script>
-                                                </form>
+                                                <tr>
+                                                    <td><?= ($index++) ?></td>
+                                                    <td><?= $std['maSV'] ?></td>
+                                                    <td><?= $std['name'] ?></td>
+                                                    <td><?= $std['gender'] ?></td>
+                                                    <td><?= $std['email'] ?></td>
+                                                    <td><?= $std['phone'] ?></td>
+                                                    <td><?= $std['classID'] ?></td>
+                                                    <td>
+                                                        <span class="table-remove">
+                                                            <button data-toggle="modal" data-target="#basicExampleModal2" class="btn btn-primary btn-rounded btn-sm my-0" onclick="editStudent(<?= $std['id'] ?>)">
+                                                                Edit
+                                                            </button>
+                                                            <button type="button" class="btn btn-danger btn-rounded btn-sm my-0" name="remove" onclick="deleteStudent(<?= $std['id'] ?>)">
+                                                                Remove
+                                                            </button>
+                                                        </span>
+                                                    </td>
+                                                </tr>
                                             <?php endforeach ?>
 
                                         </tbody>
@@ -258,11 +237,24 @@ if (!empty($_POST)) {
                 }
 
                 console.log(id)
-                $.post('delete_student.php', {
+                $.post('../controllers/delete_student.php', {
                     'id': id
                 }, function(data) {
                     alert(data)
                     location.reload()
+                })
+            }
+
+            function editStudent(id) {
+                $.ajax({
+                    url: '../controllers/edit_student.php',
+                    data: {
+                        'id': id
+                    },
+                    type: 'POST',
+                    success: function(result) {
+                        $('#modal-content').html(result)
+                    }
                 })
             }
         </script>

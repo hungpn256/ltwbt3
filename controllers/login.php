@@ -19,6 +19,7 @@ try {
             $_SESSION['username'] = $row['username'];
             $_SESSION['name'] = $row['name'];
             $_SESSION['password'] = $row['password'];
+            $_SESSION['image'] = $row['image'];
             header("Location:/ltwbt3/pages", TRUE, 301);
             return;
         } else {

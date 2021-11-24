@@ -97,7 +97,7 @@ include_once("../controllers/requireLogin.php")
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 Lịch</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">10/11/2021</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= date("d/m/Y") ?></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar-alt fa-2x text-black-300"></i>
@@ -111,7 +111,7 @@ include_once("../controllers/requireLogin.php")
                     <div class="row">
 
                         <!-- Area Chart -->
-                        <div class="col-xl-8 col-lg-7">
+                        <div class="col-xl-12 col-lg-12">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -122,33 +122,6 @@ include_once("../controllers/requireLogin.php")
                                 <div class="card-body">
                                     <div class="chart-area">
                                         <div id="chartContainer" style="height: 330px; width: 100%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Pie Chart -->
-                        <div class="col-xl-4 col-lg-5">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Biểu đồ tròn</h6>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-pie pt-4 pb-2">
-                                        <canvas id="myPieChart"></canvas>
-                                    </div>
-                                    <div class="mt-4 text-center small">
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> Direct
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> Social
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> Referral
-                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -249,43 +222,7 @@ include_once("../controllers/requireLogin.php")
 
         }
     </script>
-    <script>
-        window.onload = function() {
-            Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-            Chart.defaults.global.defaultFontColor = '#858796';
-            // Pie Chart 
-            var ctx = document.getElementById("myPieChart");
-            var myPieChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ["Direct", "Referral", "Social"],
-                    datasets: [{
-                        data: [55, 30, 15],
-                        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-                        hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
-                        hoverBorderColor: "rgba(234, 236, 244, 1)",
-                    }],
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    tooltips: {
-                        backgroundColor: "rgb(255,255,255)",
-                        bodyFontColor: "#858796",
-                        borderColor: '#dddfeb',
-                        borderWidth: 1,
-                        xPadding: 15,
-                        yPadding: 15,
-                        displayColors: false,
-                        caretPadding: 10,
-                    },
-                    legend: {
-                        display: false
-                    },
-                    cutoutPercentage: 80,
-                },
-            });
-        }
-    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="../components/vendor/jquery/jquery.min.js"></script>
     <script src="../components/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

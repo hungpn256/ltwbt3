@@ -53,7 +53,7 @@
                         <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit" name="register">Sign up</button>
 
                         <!-- Social register -->
-                        <p>or sign up with:</p>
+                        <a href="./login.php">Login</a><p>or sign up with:</p>
 
                         <a type="button" class="btn-floating btn-fb btn-sm">
                             <i class="fab fa-facebook-f"></i>

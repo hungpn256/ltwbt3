@@ -1,5 +1,5 @@
 <?php
-// include_once("../controllers/requireLogin.php");
+include_once("../controllers/requireLogin.php");
 require_once('../configs/dbhelp.php');
 $s_maMH = $s_name = $s_numberOfCreadits = '';
 
@@ -220,7 +220,7 @@ if (!empty($_POST)) {
                 }
 
                 console.log(id)
-                $.post('delete_student.php', {
+                $.post('delete_subject.php', {
                     'id': id
                 }, function(data) {
                     alert(data)

@@ -1,5 +1,5 @@
 <?php
-//include_once("../controllers/requireLogin.php");
+include_once("../controllers/requireLogin.php");
 require_once('../configs/dbhelp.php');
 $s_room = $s_numberOfSlot = $s_totalTime = $s_roomExam = $s_examAt = '';
 
@@ -143,7 +143,7 @@ if (!empty($_POST)) {
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
                                                 </div>
-                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="name" value="<?= $s_room ?>">
+                                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="room" value="<?= $s_room ?>">
                                             </div>
                                             <label for="basic-url">Số học sinh</label>
                                             <div class="input-group mb-3">
@@ -176,7 +176,6 @@ if (!empty($_POST)) {
                                     </div>
                                 </div>
                             </div>
-                            <!-- Editable table -->
                             <div class="modal fade show" id="basicExampleModal2" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content" id="modal-content">
@@ -201,18 +200,18 @@ if (!empty($_POST)) {
                             </tr>
                         </thead>
                         <tbody>
-                            <?php                         
+                            <?php
                             $sql = 'SELECT  subjectsemester.id, type, startYear, endYear, maMH, room, numberOfSlot, totalTime, roomExam, examAt FROM subjectsemester INNER JOIN subject ON subject.id = subjectsemester.Subjectid inner join semester on semester.id = subjectsemester.Semesterid ;';
-                            
+
                             $List = executeResult($sql);
                             $index = 1;
-                            
+
                             ?>
 
                             <?php foreach ($List as $std) : ?>
                                 <tr>
                                     <td><?= ($index++) ?></td>
-                                    <td><?= $std['type']."-".$std['startYear']."-".$std['endYear'] ?></td>
+                                    <td><?= $std['type'] . "-" . $std['startYear'] . "-" . $std['endYear'] ?></td>
                                     <td><?= $std['maMH'] ?></td>
                                     <td><?= $std['room'] ?></td>
                                     <td><?= $std['numberOfSlot'] ?></td>
@@ -235,39 +234,123 @@ if (!empty($_POST)) {
                         </tbody>
                     </table>
                 </div>
+                <div class="container-fluid">
+                    <div class="d-sm-flex mb-4">
+                        <h2 class="mt-5 text-gray-800">Đăng ký Môn học</h2>
+                    </div>
+                    <div class="d-sm-flex flex-column align-items-center  mb-4">
+                        <h3 class=" mb-3 text-gray-800">Chọn môn học </h3>
+                        <form method="post" action="../controllers/registersubject.php">
+                            <?php
+                            $sql = 'SELECT  subjectsemester.id, type, startYear, endYear, subject.name FROM subjectsemester INNER JOIN subject ON subject.id = subjectsemester.Subjectid inner join semester on semester.id = subjectsemester.Semesterid ;';
+                            $List = executeResult($sql);
+                            ?>
+                            <label for="basic-url">Môn học</label>
+                            <div class="d-flex justify-content-center ">
+                                <select class="form-select form-select-md shadow" name="subjectsemesterid">
+                                    <?php foreach ($List as $l) : ?>
+                                        <option value="<?= $l['id'] ?>"> <?= $l['type'] . "-" . $l['startYear'] . "-" . $l['endYear'] . "-" . $l['name'] ?> </option>
+
+                                    <?php endforeach ?>
+                                </select>
+                            </div>
+                            <?php
+                            $sql = 'select * from user';
+                            $List = executeResult($sql);
+                            ?>
+                            <label for="basic-url">Sinh viên</label>
+                            <div class="d-flex justify-content-center ">
+                                <select class=" form-select form-select-md mb-3" name="userid">
+                                    <?php foreach ($List as $sl) : ?>
+                                        <option value="<?= $sl['id'] ?>"> <?= $sl['name'] . "-" . $sl['maSV'] ?> </option>
+
+                                    <?php endforeach ?>
+                                </select>
+                            </div>
+                            <span class="table-add d-flex justify-content-center m-3">                                
+                                <button type="submit" class="btn btn-primary btn-rounded btn-md">
+                                    Thêm sinh viên
+                                </button>
+                            </span>
+                        </form>
+                    </div>
+                    <table class="table table-bordered table-responsive-md table-striped text-center">
+                        <thead>
+                            <tr>
+                                <th class="text-center">STT</th>
+                                <th class="text-center">Kỳ học</th>
+                                <th class="text-center">Mã môn học</th>
+                                <th class="text-center">Sinh viên</th>
+                                <th class="text-center">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $sql = 'SELECT  registersubject.id, semester.type, semester.startYear, semester.endYear, maMH, user.name  FROM registersubject 
+                            INNER JOIN user on user.id = registersubject.Userid inner join subjectsemester on subjectsemester.id = registersubject.SubjectSemesterid 
+                            inner join semester on semester.id = subjectsemester.Semesterid INNER JOIN subject ON subject.id = subjectsemester.Subjectid;';
+
+                            $List = executeResult($sql);
+                            $index = 1;
+
+                            ?>
+
+                            <?php foreach ($List as $std) : ?>
+                                <tr>
+                                    <td><?= ($index++) ?></td>
+                                    <td><?= $std['type'] . "-" . $std['startYear'] . "-" . $std['endYear'] ?></td>
+                                    <td><?= $std['maMH'] ?></td>
+                                    <td><?= $std['name'] ?></td>
+
+                                    <td>
+                                        <span class="table-remove">
+                                            <button data-toggle="modal" data-target="#basicExampleModal2" class="btn btn-primary btn-rounded btn-sm my-0" onclick="editSubSem(<?= $std['id'] ?>)">
+                                                Edit
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-rounded btn-sm my-0" name="remove" onclick="deleteSubSem(<?= $std['id'] ?>)">
+                                                Remove
+                                            </button>
+                                        </span>
+                                    </td>
+                                </tr>
+                            <?php endforeach ?>
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
     <?php include_once("logout.php") ?>
     <script type="text/javascript">
-            function deleteSubSem(id) {
-                option = confirm('Bạn có muốn xoá bản này không?')
-                if (!option) {
-                    return;
-                }
+        function deleteSubSem(id) {
+            option = confirm('Bạn có muốn xoá bản này không?')
+            if (!option) {
+                return;
+            }
 
-                console.log(id)
-                $.post('../controllers/delete_subjectsemester.php', {
+            console.log(id)
+            $.post('../controllers/delete_subjectsemester.php', {
+                'id': id
+            }, function(data) {
+                alert(data)
+                location.reload()
+            })
+        }
+
+        function editSubSem(id) {
+            $.ajax({
+                url: '../controllers/edit_subjectsemester.php',
+                data: {
                     'id': id
-                }, function(data) {
-                    alert(data)
-                    location.reload()
-                })
-            }
-
-            function editSubSem(id) {
-                $.ajax({
-                    url: '../controllers/edit_subjectsemester.php',
-                    data: {
-                        'id': id
-                    },
-                    type: 'POST',
-                    success: function(result) {
-                        $('#modal-content').html(result)
-                    }
-                })
-            }
-        </script>
+                },
+                type: 'POST',
+                success: function(result) {
+                    $('#modal-content').html(result)
+                }
+            })
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="../components/vendor/jquery/jquery.min.js"></script>
     <script src="../components/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

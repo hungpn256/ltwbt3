@@ -1,9 +1,39 @@
 <?php
-    include_once("../controllers/requireLogin.php");
+include_once("../controllers/requireLogin.php");
+require_once('../configs/dbhelp.php');
+$s_pointCC = $s_pointKT = $s_pointExam = '';
+
+if (!empty($_POST)) {
+
+    if (isset($_POST['pointCC'])) {
+        $s_pointCC = $_POST['pointCC'];
+    }
+
+    if (isset($_POST['pointKT'])) {
+        $s_pointKT = $_POST['pointKT'];
+    }
+
+    if (isset($_POST['pointExam'])) {
+        $s_pointExam = $_POST['pointExam'];
+    }
+
+    if (isset($_POST['id'])) {
+        $s_id = $_POST['id'];
+    }
+    $s_pointCC = str_replace('\'', '\\\'', $s_pointCC);
+    $s_pointKT = str_replace('\'', '\\\'', $s_pointKT);
+    $s_pointExam = str_replace('\'', '\\\'', $s_pointExam);
+    $s_id = str_replace('\'', '\\\'', $s_id);
+
+    //update
+    $sql = "update registersubject set pointCC = '$s_pointCC', pointKT = '$s_pointKT', pointExam = '$s_pointExam' where id = " . $s_id;
+    execute($sql);
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,15 +57,15 @@
 
 <body id="page-top">
 
-    <div id="wrapper">       
-        <?php 
-            include_once("sidebar.php");
+    <div id="wrapper">
+        <?php
+        include_once("sidebar.php");
         ?>
 
-        <div id="content-wrapper" class="d-flex flex-column">
-            <div id="content">                
+        <div id="content-wrapper" class="d-flex flex-column ">
+            <div id="content">
                 <div>
-                    <?php include_once("topbar.php");?>
+                    <?php include_once("topbar.php"); ?>
                 </div>
                 <div class="container-fluid">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -44,29 +74,21 @@
                     <div class="row">
                         <div class="card">
                             <div class="card-body">
-                                <div id="table" class="table-subject">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <form class="form-inline">
-                                            <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search">
-                                            <i class="fas fa-search" aria-hidden="true"></i>
+                                
 
-                                        </form>
-                                        <span class="table-add float-right mb-3 mr-2 ml-4"><a href="#!" class="text-success">
-                                                <button type="button" class="btn btn-primary btn-rounded btn-sm" data-toggle="modal" data-target="#basicExampleModal">
-                                                    <i class="fas fa-plus fa-2x" aria-hidden="true"></i>
-                                                </button></a></span>
-                                    </div>
-                                    <div class="row" style="justify-content: center">
-                                        <div class="col-3">
-                                            <label for="basic-url">Nhập học kì xem điểm thi (vd 20211)</label>
-                                            <div class="input-group mb-3 ">
-                                                <input type="text" class="form-control" placeholder="" aria-label="Recipient's username" aria-describedby="button-addon2" />
-                                                <button class="btn-outline-primary ml-2" type="button" data-mdb-ripple-color="dark">
-                                                    Xem
-                                                </button>
+                                    <form method="post" action="">
+                                        <div class="row" style="justify-content: center">
+                                            <div class="col-3">
+                                                <h3 class=" mb-3 text-gray-800">Nhập học kì xem điểm thi</h3>
+                                                <div class="input-group mb-3 ">
+                                                    <input type="text" class="form-control" placeholder="1-2019-2020" aria-label="" aria-describedby="button-addon2" />
+                                                    <button class="btn-outline-primary ml-2" type="submit">
+                                                        Xem
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </form>
                                     <table class="table table-bordered table-responsive-md table-striped text-center">
                                         <thead>
                                             <tr>
@@ -76,177 +98,73 @@
                                                 <th class="text-center">Mã môn học</th>
                                                 <th class="text-center">Tên môn học</th>
                                                 <th class="text-center">Điểm CC</th>
-                                                <th class="text-center">Điểm BT</th>
-                                                <th class="text-center">Điểm TH</th>
+                                                <th class="text-center">Điểm KT</th>
                                                 <th class="text-center">Điểm thi</th>
                                                 <th class="text-center">Thao tác</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <!-- Viet ma PHP -->
-                                            <tr>
-                                                <td class="pt-3-half">1</td>
-                                                <td class="pt-3-half">B18DCCN189</td>
-                                                <td class="pt-3-half">Đỗ Thị Thu Hà</td>
-                                                <td class="pt-3-half">INT1342M</td>
-                                                <td class="pt-3-half">Phân tích và thiết kế hệ thống thông tin</td>
-                                                <td class="pt-3-half">10</td>
-                                                <td class="pt-3-half">8</td>
-                                                <td class="pt-3-half"></td>
-                                                <td class="pt-3-half">8.5</td>
-                                                <td>
-                                                    <span class="table-remove"><button type="button" data-toggle="modal" data-target="#basicExampleModal7" class="btn btn-primary btn-rounded btn-sm my-0">
-                                                            Edit
-                                                        </button><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">
-                                                            Remove
-                                                        </button></span>
-                                                </td>
-                                            </tr>
+                                            <?php
+                                            $sql = 'SELECT registersubject.id, user.name as sName, maSV, maMH, subject.name, pointCC, pointKT, pointExam from registersubject INNER JOIN user on user.id = registersubject.Userid inner join subjectsemester on subjectsemester.id = registersubject.SubjectSemesterid 
+                                            inner join semester on semester.id = subjectsemester.Semesterid INNER JOIN subject ON subject.id = subjectsemester.Subjectid;';
+                                            $List = executeResult($sql);
+                                            $index = 1;
+
+                                            ?>
+
+                                            <?php foreach ($List as $std) : ?>
+                                                <tr>
+                                                    <td><?= ($index++) ?></td>
+                                                    <td><?= $std['maSV'] ?></td>
+                                                    <td><?= $std['sName'] ?></td>
+                                                    <td><?= $std['maMH'] ?></td>
+                                                    <td><?= $std['name'] ?></td>
+                                                    <td><?= $std['pointCC'] ?></td>
+                                                    <td><?= $std['pointKT'] ?></td>
+                                                    <td><?= $std['pointExam'] ?></td>
+                                                    <td>
+                                                        <span class="table-remove">
+                                                            <button data-toggle="modal" data-target="#basicExampleModal2" class="btn btn-primary btn-rounded btn-sm my-0" onclick="editP(<?= $std['id'] ?>)">
+                                                                Edit
+                                                            </button>                                                           
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach ?>
+
                                         </tbody>
                                     </table>
-                                </div>
+                                    <div class="modal fade show" id="basicExampleModal2" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content" id="modal-content">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                
                             </div>
                         </div>
-                        <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Thêm điểm</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body" method="post">
-                                        <label for="basic-url">Mã sinh viên</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                            </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                        <label for="basic-url">Tên sinh viên</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                            </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                        <label for="basic-url">Mã môn học</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                            </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                        <label for="basic-url">Tên môn học</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                            </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                        <label for="basic-url">Điểm CC</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                            </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                        <label for="basic-url">Điểm BT</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                            </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                        <label for="basic-url">Điểm TH</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                            </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                        <label for="basic-url">Điểm thi</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                            </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                                        <button type="button" class="btn btn-primary">Lưu</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Editable table -->
-                        <div class="modal fade" id="basicExampleModal7" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel7" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel7">Chỉnh sửa điểm</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <label for="basic-url">Mã sinh viên</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                            </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                        <label for="basic-url">Tên sinh viên</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                            </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                        <label for="basic-url">Mã môn học</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                            </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                        <label for="basic-url">Tên môn học</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                            </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                        <label for="basic-url">Điểm CC</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                            </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                        <label for="basic-url">Điểm BT</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                            </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                        <label for="basic-url">Điểm TH</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                            </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                        <label for="basic-url">Điểm thi</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                            </div>
-                                            <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                                        <button type="button" class="btn btn-primary">Lưu thay đổi</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <?php include_once("logout.php")?>
-
+    <?php include_once("logout.php") ?>
+    <script type="text/javascript">       
+        function editP(id) {
+            $.ajax({
+                url: '../controllers/edit_point.php',
+                data: {
+                    'id': id
+                },
+                type: 'POST',
+                success: function(result) {
+                    $('#modal-content').html(result)
+                }
+            })
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="../components/vendor/jquery/jquery.min.js"></script>
     <script src="../components/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

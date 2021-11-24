@@ -19,10 +19,10 @@ try {
             $_SESSION['username'] = $row['username'];
             $_SESSION['name'] = $row['name'];
             $_SESSION['password'] = $row['password'];
-            header("Location:http://localhost:8080/ltwbt3/pages", TRUE, 301);
+            header("Location:/ltwbt3/pages", TRUE, 301);
             return;
         } else {
-            header("Location:http://localhost:8080/ltwbt3/pages/login.php", TRUE, 301);
+            header("Location:/ltwbt3/pages/login.php", TRUE, 301);
         }
     }
 } catch (Exception $e) {

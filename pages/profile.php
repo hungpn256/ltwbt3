@@ -28,12 +28,10 @@ require_once('../configs/dbhelp.php');
 </head>
 
 <body id="page-top">
-
     <div id="wrapper">
         <?php
         include_once("sidebar.php");
         ?>
-
         <div id="content-wrapper" class="d-flex flex-column" style="height:100vh; overflow-y:scroll">
             <div id="content">
                 <div>
@@ -46,17 +44,19 @@ require_once('../configs/dbhelp.php');
                     <div class="container">
                         <div class="row">
                             <div class="col-4">
-                                <form class="md-form">
+                                <form class="md-form" action="../controllers/upload_image.php" method="post" enctype="multipart/form-data">
                                     <div class="file-field">
                                         <div class="mb-4 d-flex justify-content-center">
                                             <img id="avatar-image" width="60%" style="aspect-ratio: 1 / 1;" src="<?php if ($image != '') echo $image;
-                                                                                    else echo "https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg" ?>" class="rounded-circle z-depth-1-half avatar-pic" alt="example placeholder avatar">
+                                                                                                                    else echo "https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg" ?>" class="rounded-circle z-depth-1-half avatar-pic" alt="example placeholder avatar">
                                         </div>
                                         <div class="d-flex justify-content-center">
                                             <div class="btn btn-mdb-color btn-rounded float-left">
-                                                <input type="file" id="input-avatar" onchange="readURL(this)">
+                                                <input value="<?= $id ?>" type="hidden" id="input-avatar" name="id">
+                                                <input name="fileToUpload" type="file" id="input-avatar" onchange="readURL(this)">
                                             </div>
                                         </div>
+                                        <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit" name="edit-profile">Change avatar</button>
                                     </div>
                                 </form>
                                 <script type="text/javascript">
@@ -75,26 +75,21 @@ require_once('../configs/dbhelp.php');
                                 <div class="d-sm-flex align-items-center justify-content-between mb-4 text-center">
                                     <h3 class="h3 mb-0 text-gray-800">Chỉnh sửa thông tin cá nhân</h3>
                                 </div>
-                                <form class="text-center" style="color: #757575;" action="../controllers/register.php" method="POST">
+                                <form class="text-center" style="color: #757575;" action="../controllers/edit_profile.php" method="POST">
 
                                     <div class="md-form mt-5">
-                                        <input required type="text" id="materialRegisterFormName" class="form-control" name="name" value="<?= $name ?>">
-                                        <label for="materialRegisterFormName">Name</label>
-                                    </div>
-
-                                    <!-- E-mail -->
-                                    <div class="md-form mt-0">
-                                        <input required type="text" id="materialRegisterFormUsername" class="form-control" name="username" value="<?= $username ?>">
+                                        <input disabled required type="text" id="materialRegisterFormUsername" class="form-control" name="username" value="<?= $username ?>">
                                         <label for="materialRegisterFormUsername">Username</label>
                                     </div>
 
-                                    <!-- Password -->
+                                    <div class="md-form">
+                                        <input required type="text" id="materialRegisterFormName" class="form-control" name="name" value="<?= $name ?>">
+                                        <label for="materialRegisterFormName">Name</label>
+                                    </div>
                                     <div class="md-form">
                                         <input required type="password" id="materialRegisterFormPassword" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock" name="password" value="<?= $password ?>">
                                         <label for="materialRegisterFormPassword">Password</label>
                                     </div>
-
-                                    <!-- Sign up button -->
                                     <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit" name="edit-profile">Chỉnh sửa</button>
 
                                 </form>

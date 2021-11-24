@@ -1,22 +1,12 @@
 <?php
 session_start();
-include_once("../configs/db.php");
-if (isset($_POST['register'])) {
-    if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['name'])) {
-        // header("location:". DOMAIN . "/pages/register.php", true, 301);
-    } else {
-        try {
-            $pre_stm = $con->prepare("INSERT INTO admin(username,password,name) VALUES (?,?,?)");
-            $pre_stm->bind_param("sss", $_POST['username'], $_POST['password'], $_POST['name']);
-            $pre_stm->execute();
+require_once("../configs/dbhelp.php");
 
-            header("Location:http://localhost/ltwbt3/pages/login.php", TRUE, 301);
-            
-        } catch (PDOException $e) {
-            // header("Location:" . DOMAIN . "/pages/register.php", TRUE, 301);
-            echo "Error: " . $e->getMessage();
-        }
-    }
-} else {
-    echo "not working";
-}
+$passwordPOST = $_POST['password'];
+$usernamePOST = $_POST['username'];
+$namePOST = $_POST['name'];
+$sql = "INSERT INTO admin(username,password,name) VALUES ('$usernamePOST','$passwordPOST','$namePOST')";
+execute($sql);
+header("Location:/ltwbt3/pages/login.php", TRUE, 301);
+
+echo "fail";

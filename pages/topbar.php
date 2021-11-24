@@ -3,8 +3,9 @@
         <div class="topbar-divider d-none d-sm-block"></div>
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle mt-5" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img id="avatar-icon" width="30px" style="aspect-ratio: 1 / 1;" src="<?php if ($image != '') echo $image;
+                                                                                                                    else echo "https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg" ?>" class="rounded-circle z-depth-1-half avatar-pic" alt="example placeholder avatar">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 "><?= $name ?></span>
-                
             </a>
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="/ltwbt3/pages/profile.php">

@@ -4,7 +4,7 @@
     $name = $_SESSION['name'];
     $username = $_SESSION['username'];
     $password = $_SESSION['password'];
-    $image = '';
+    $image = $_SESSION['image'];
     if(isset($_SESSION['image'])){
         $image = $_SESSION['image'];
     }

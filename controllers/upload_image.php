@@ -1,4 +1,6 @@
 <?php
+include_once("../controllers/requireLogin.php");
+require_once('../configs/dbhelp.php');
 $target_dir = "../uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
@@ -15,11 +17,6 @@ if(isset($_POST["submit"])) {
   }
 }
 
-if (file_exists($target_file)) {
-  echo "Sorry, file already exists.";
-  $uploadOk = 0;
-}
-
 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
 && $imageFileType != "gif" ) {
   echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
@@ -30,7 +27,10 @@ if ($uploadOk == 0) {
   echo "Sorry, your file was not uploaded.";
 } else {
   if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-    echo "Upload success";
+    $sql = "UPDATE admin SET image = '$target_file' WHERE id = ".$id;
+    execute($sql);
+    $_SESSION['image'] = $target_file;
+    header("Location:/ltwbt3/pages/profile.php");
   } else {
     echo "Failure";
   }

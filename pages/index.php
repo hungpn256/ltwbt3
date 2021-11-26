@@ -21,7 +21,6 @@ include_once("../controllers/requireLogin.php")
 <body id="page-top">
 
     <div id="wrapper">
-        <!-- Sidebar -->
         <?php include_once("sidebar.php");?>
 
         <div id="content-wrapper" class="d-flex flex-column">

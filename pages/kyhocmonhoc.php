@@ -72,7 +72,11 @@ if (!empty($_POST)) {
     <link href="../components/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="../components/css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -236,91 +240,7 @@ if (!empty($_POST)) {
 
                                     </tbody>
                                 </table>
-                            </div>
-                            <div class="container-fluid">
-                                <div class="d-sm-flex mb-4">
-                                    <h2 class="mt-5 text-gray-800">Đăng ký Môn học</h2>
-                                </div>
-                                <div class="d-sm-flex flex-column align-items-center  mb-4">
-                                    <h3 class=" mb-3 text-gray-800">Chọn môn học </h3>
-                                    <form method="post" action="../controllers/registersubject.php">
-                                        <?php
-                                        $sql = 'SELECT  subjectsemester.id, type, startYear, endYear, subject.name FROM subjectsemester INNER JOIN subject ON subject.id = subjectsemester.Subjectid inner join semester on semester.id = subjectsemester.Semesterid ;';
-                                        $List = executeResult($sql);
-                                        ?>
-                                        <label for="basic-url">Môn học</label>
-                                        <div class="d-flex justify-content-center ">
-                                            <select class="form-select form-select-md shadow" name="subjectsemesterid">
-                                                <?php foreach ($List as $l) : ?>
-                                                    <option value="<?= $l['id'] ?>"> <?= $l['type'] . "-" . $l['startYear'] . "-" . $l['endYear'] . "-" . $l['name'] ?> </option>
-
-                                                <?php endforeach ?>
-                                            </select>
-                                        </div>
-                                        <?php
-                                        $sql = 'select * from user';
-                                        $List = executeResult($sql);
-                                        ?>
-                                        <label for="basic-url">Sinh viên</label>
-                                        <div class="d-flex justify-content-center ">
-                                            <select class=" form-select form-select-md mb-3" name="userid">
-                                                <?php foreach ($List as $sl) : ?>
-                                                    <option value="<?= $sl['id'] ?>"> <?= $sl['name'] . "-" . $sl['maSV'] ?> </option>
-
-                                                <?php endforeach ?>
-                                            </select>
-                                        </div>
-                                        <span class="table-add d-flex justify-content-center m-3">
-                                            <button type="submit" class="btn btn-primary btn-rounded btn-md">
-                                                Thêm sinh viên
-                                            </button>
-                                        </span>
-                                    </form>
-                                </div>
-                                <table class="table table-bordered table-responsive-md table-striped text-center">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">STT</th>
-                                            <th class="text-center">Kỳ học</th>
-                                            <th class="text-center">Mã môn học</th>
-                                            <th class="text-center">Sinh viên</th>
-                                            <th class="text-center">Thao tác</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        $sql = 'SELECT  registersubject.id, semester.type, semester.startYear, semester.endYear, maMH, user.name  FROM registersubject 
-                                        INNER JOIN user on user.id = registersubject.Userid inner join subjectsemester on subjectsemester.id = registersubject.SubjectSemesterid 
-                                        inner join semester on semester.id = subjectsemester.Semesterid INNER JOIN subject ON subject.id = subjectsemester.Subjectid;';
-
-                                        $List = executeResult($sql);
-                                        $index = 1;
-
-                                        ?>
-
-                                        <?php foreach ($List as $std) : ?>
-                                            <tr>
-                                                <td><?= ($index++) ?></td>
-                                                <td><?= $std['type'] . "-" . $std['startYear'] . "-" . $std['endYear'] ?></td>
-                                                <td><?= $std['maMH'] ?></td>
-                                                <td><?= $std['name'] ?></td>
-
-                                                <td>
-                                                    <span class="table-remove">
-                                                        <button data-toggle="modal" data-target="#basicExampleModal2" class="btn btn-primary btn-rounded btn-sm my-0" onclick="editSubSem(<?= $std['id'] ?>)">
-                                                            Edit
-                                                        </button>
-                                                        <button type="button" class="btn btn-danger btn-rounded btn-sm my-0" name="remove" onclick="deleteSubSem(<?= $std['id'] ?>)">
-                                                            Remove
-                                                        </button>
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                        <?php endforeach ?>
-
-                                    </tbody>
-                                </table>
-                            </div>
+                            </div>                           
                         </div>
                     </div>
                 </div>

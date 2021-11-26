@@ -127,7 +127,7 @@ if (!empty($_POST)) {
                                                         <td><?= $std['endYear'] ?></td>
                                                         <td>
                                                             <span class="table-remove">
-                                                                <button data-toggle="modal" data-target="#basicExampleModal2" id="edit<?= $std['id'] ?>" class="btn btn-primary btn-rounded btn-sm my-0" name="edit">
+                                                                <button data-toggle="modal" data-target="#Modal2" id="edit<?= $std['id'] ?>" class="btn btn-primary btn-rounded btn-sm my-0" name="edit">
                                                                     Edit
                                                                 </button>
                                                                 <button type="button" class="btn btn-danger btn-rounded btn-sm my-0" name="remove" onclick="deleteS(<?= $std['id'] ?>)">
@@ -200,7 +200,7 @@ if (!empty($_POST)) {
                             </div>
                         </div>
                         <!-- Editable table -->
-                        <div class="modal fade show" id="basicExampleModal2" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+                        <div class="modal fade show" id="Modal2" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content" id="modal-content">
                                     

@@ -20,7 +20,7 @@
     </div>
 
     <li class="nav-item">
-        <a class="nav-link" href="bangtin.php">
+        <a class="nav-link" href="news.php">
 
             <span class="fs-6">Bảng tin</span>
         </a>
@@ -33,8 +33,8 @@
         <div id="NganhHocThuGon" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Chỉnh sửa thông tin</h6>
-                <a class="collapse-item fs-6" href="congnghe.php">Công nghệ</a>
-                <a class="collapse-item fs-6" href="kinhte.php">Kinh tế</a>
+                <a class="collapse-item fs-6" href="it.php">Công nghệ</a>
+                <a class="collapse-item fs-6" href="economic.php">Kinh tế</a>
 
             </div>
         </div>
@@ -65,5 +65,10 @@
         <a class="nav-link fs-5" href="kyhocmonhoc.php">
 
             <span class="fs-6">Kỳ học - Môn học</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link fs-5" href="registersubject.php">
+
+            <span class="fs-6">Đăng ký môn</span></a>
     </li>
 </ul>
